@@ -1,92 +1,91 @@
 ![](https://i.imgur.com/xG74tOh.png)
 
-# Exercício 01
+# Challenge 01
 
-## Criação de API com autenticação
+## API creation with authentication
 
-Você acaba de receber uma proposta como freelancer para construir uma API que irá catalogar **Pokemons**. Entretanto, não se trata de uma simples API, pois ela possuirá autenticação para que cada usuario logado possa catalogar seus **Pokemons**.
+You have just received a proposal as a freelancer to build an API that will catalog **Pokemons**. However, this is not a simple API, as it will have authentication so that each logged in user can catalog his **Pokemons**.
 
-Sendo assim, vamos aos requisitos proposto pelo contratante.
+So let's go to the requirements proposed by the contractor.
 
-1 - Deverá existir um banco de dados chamado `catalogo_pokemons` com as tabelas descritas abaixo e todo código de criação das tabelas deverá se colocado no arquivo `dump.sql`
+1 - There must be a database called `pokemon_catalog` with the tables described below and all the code for creating the tables must be placed in the `dump.sql` file
 
-a) Tabela `usuarios` com os campos:
+a) `users` table with the fields:
 
-- id - identificador único do usuário como chave primaria e auto incremento;
-- nome - (obrigatório)
-- email - (obrigatório e único)
-- senha - (obrigatório)
+- id - User's unique identifier as primary key and auto increment;
+- nome - (mandatory)
+- email - (mandatory and unique)
+- senha - (mandatory)
 
-b) Tabela `pokemons` com os campos
+b) `pokemons` table with the fields:
 
-- id - identificador único do pokemon como chave primaria e auto incremento;
-- usuario_id - (obrigatório)
-- nome - (obrigatório)
-- habilidades - (obrigatótio)
-- imagem
-- apelido
+- id - unique pokemon identifier as primary key and auto increment;
+- usuario_id - (mandatory)
+- nome - (mandatory)
+- habilidades - (mandatory)
+- image
+- nickname
 
-2 - Para a entidade `usuarios` deverá ser implementado as seguintes funcionalidades.
+2 - For the `users` entity, the following functionalities must be implemented.
 
-a) Cadastro de usuário
+a) User registration
 
-- A senha do usuário deverá ser criptografada usando a biblioteca `bcrypt` antes de salvar o cadastro.
+- The user's password must be encrypted using the `bcrypt` library before saving the record.
 
-b) Login de usuário
+b) User login
 
-- Validar as credenciais do usuário usando a biblioteca `bcrypt`.
-- Gerar o token de autenticação com a biblioteca `jsonwebtoken`.
+- Validate user credentials using the `bcrypt` library.
+- Generate the authentication token with the `jsonwebtoken` library.
 
-3 - Para a entidade `pokemons` deverá ser implementado as seguintes funcionalidades.
+3 - For the `pokemons` entity, the following functionalities must be implemented.
 
-a) Cadastro do pokemons
+a) Pokemon registration
 
-b) Atualização apenas do apelido do pokemon
+b) Pokemon nickname update only
 
-c) Listagem completa dos pokemons
+c) Complete list of pokemons
 
-d) Listagem de apenas um pokemon filtrado pelo seu id
+d) Listing of only one pokemon filtered by its id
 
-e) Exclusão do pokemon
+e) Exclusion of pokemon
 
-É obrigatório para as funcionalidades da entidade `pokemons`:
+It is mandatory for the features of the `pokemons` entity:
 
-- Receber o token do header da requisição (_authorization_) no formato `Bearer Token` e validar o usuário logado em todos os endpoints.
-- O campo `usuario_id` não deve ser capturado do body da requisição. Deve ser obtido do token recebido no header.
-- No cadastro de pokemon, o campo `habilidades` deverá receber apenas uma string de habilidades separadas por vírgulas.
-- Na listagem de pokemons o campo `habilidades` deverá retornar um array de habilidades.
+- Receive the request header token (_authorization_) in `Bearer Token` format and validate the logged in user on all endpoints.
+- The `user_id` field must not be captured from the request body. It must be obtained from the token received in the header.
+- In the pokemon register, the `skills` field should only receive a string of skills separated by commas.
 
-_Obs.: É preciso realizar todas as validações necessárias para evitar erros no banco de dados_
+_Obs.: It is necessary to carry out all the necessary validations to avoid errors in the database_
 
-Exemplo do body para cadastro do pokemon:
+Body example for pokemon registration:
 
 ```
 {
-    "nome": "Pikachu",
-    "apelido": "pikachu",
-    "habilidades": "static, lightning-rod",
-    "imagem": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/25.svg"
+    "name": "Pikachu",
+    "nickName": "pikachu",
+    "skills": "static, lightning-rod",
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/25.svg"
 }
 ```
 
-Exemplo de retorno na listagem de pokemons:
+Return example in pokemon listing:
 
 ```
 [
     {
         "id": 1,
-        "usuario": "Nome do usuário responsável"
-        "nome": "Pikachu",
-        "apelido": "pikachu",
-        "habilidades": ["static", "lightning-rod"],
-        "imagem": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/25.svg"
+        "user": "Responsible user name"
+        "name": "Pikachu",
+        "nickName": "pikachu",
+        "skills": ["static", "lightning-rod"],
+        "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/25.svg"
     },
     {
         "id": 2,
-        "usuario": "Nome do usuário responsável"
-        "nome": "Bulbasaur",
-        "apelido": "bulbasaur",
-        "habilidades": ["overgrow", "chlorophyll"],
+        "user": "Responsible user name"
+        "name": "Bulbasaur",
+        "nickName": "bulbasaur",
+        "skills": ["overgrow", "chlorophyll"],
         "imagem": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg"
     }
 ]
@@ -94,11 +93,6 @@ Exemplo de retorno na listagem de pokemons:
 
 ---
 
-Preencha a checklist para finalizar o exercício:
 
-- [ ] Resolver o exercício revendo a aula se necessário
-- [ ] Adicionar as mudanças aos commits (`git add .` para adicionar todos os arquivos ou `git add nome_do_arquivo` para adicionar um arquivo específico)
-- [ ] Commitar a cada mudança significativa ou na finalização do exercício (`git commit -m "Mensagem do commit"`)
-- [ ] Pushar os commits no seu fork na origem (`git push origin nome-da-branch`)
 
-###### tags: `exercícios` `lógica` `banco de dados` `sql` `postgres`
+###### tags: `challenges` `node` `database` `sql` `postgres`
