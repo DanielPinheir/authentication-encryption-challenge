@@ -13,18 +13,18 @@ So let's go to the requirements proposed by the contractor.
 a) `users` table with the fields:
 
 - id - User's unique identifier as primary key and auto increment;
-- nome - (mandatory)
+- name - (mandatory)
 - email - (mandatory and unique)
-- senha - (mandatory)
+- password - (mandatory)
 
 b) `pokemons` table with the fields:
 
 - id - unique pokemon identifier as primary key and auto increment;
-- usuario_id - (mandatory)
-- nome - (mandatory)
-- habilidades - (mandatory)
+- user_id - (mandatory)
+- name - (mandatory)
+- skills - (mandatory)
 - image
-- nickname
+- nickName
 
 2 - For the `users` entity, the following functionalities must be implemented.
 
